@@ -1,3 +1,5 @@
+# This is the class notes
+
 puts "What is your first name?"
 
 first_name = gets.chomp
