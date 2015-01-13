@@ -56,19 +56,19 @@
 
 # ---Stept 4
 
-# print "Please enter the maximum number: "
-# MAX = gets.to_i
-# secret_number = Random.rand(MAX + 1)
+print "Please enter the maximum number: "
+MAX = gets.to_i
+secret_number = Random.rand(MAX + 1)
 
-# while true
-# 	print "What's your guess? (between 0 and #{MAX})"
-# 	guess_number = gets.to_i
-# 	if guess_number > secret_number 
-# 		puts "Wrong, guess lower."
-# 	elsif guess_number < secret_number 
-# 		puts "Wrong, guess higher."
-# 	else
-# 		puts "Congratulations! Your won!"
-# 		false
-# 	end
-# end
+while true
+	print "What's your guess? (between 0 and #{MAX})"
+	guess_number = gets.to_i
+	if guess_number > secret_number 
+		puts "Wrong, guess lower."
+	elsif guess_number < secret_number 
+		puts "Wrong, guess higher."
+	else
+		puts "Congratulations! Your won!"
+		false
+	end
+end
