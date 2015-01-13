@@ -31,7 +31,7 @@ def multply(number1,number2)
 end
 
 def division(number1,number2)
-  number1 / number2
+  number1.to_f / number2
 end
 
 def expo(number1,number2)
