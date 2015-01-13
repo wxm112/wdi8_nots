@@ -44,20 +44,22 @@ def expo(number1,number2)
 	puts "The result is: #{result}"
 end
 
-# def square_roots(n)
-# 	result = Math.sqrt(n)
-# 	puts "The result is: #{result}"
-# end
+def square_roots(n)
+	result = Math.sqrt(n)
+	puts "The result is: #{result}"
+end
 
 menu_selection = read_choice
 
-if menu_selection != "q"
+if menu_selection != "q" && menu_selection != '6'
 	print "Enter the first number: "
 	n1 = gets.to_i
-
 	print "Enter the second number: "
 	n2 = gets.to_i
-end
+elsif menu_selection == '6'
+	print "Enter your number: "
+	n = gets.to_i	
+end	
 
 while menu_selection != "q"
 	case menu_selection
@@ -71,20 +73,20 @@ while menu_selection != "q"
 		division(n1,n2)
 	when '5'
 		expo(n1,n2)
-	# when '6'
-	# 	square_roots(n)
+	when '6'
+		square_roots(n)
 	else
 		puts "Unknown function"
 	end
 	menu_selection = read_choice
-		if menu_selection != "q"
+		if menu_selection != "q" && menu_selection != '6'
 			print "Enter the first number: "
 			n1 = gets.to_i
 			print "Enter the second number: "
 			n2 = gets.to_i
-		# elsif menu_selection == '6'
-		# 	print "Enter your number: "
-		# 	n = gets.to_i	
+		elsif menu_selection == '6'
+			print "Enter your number: "
+			n = gets.to_i	
 		end	
 end
 
