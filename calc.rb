@@ -15,8 +15,7 @@ def read_choice
 
 	print "Please enter your selections: "
 
-	choice = gets.chomp.downcase
-	choice
+	gets.chomp.downcase
 end
 
 def add(number1,number2)
