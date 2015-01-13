@@ -42,7 +42,6 @@ def square_roots(n)
   Math.sqrt(n)
 end
 
-menu_selection = nil
 
 loop do
   menu_selection = read_choice
