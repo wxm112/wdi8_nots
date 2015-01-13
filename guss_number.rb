@@ -57,18 +57,21 @@
 # ---Stept 4
 
 print "Please enter the maximum number: "
-MAX = gets.to_i
-secret_number = Random.rand(MAX + 1)
-
-while true
-	print "What's your guess? (between 0 and #{MAX})"
-	guess_number = gets.to_i
-	if guess_number > secret_number 
-		puts "Wrong, guess lower."
-	elsif guess_number < secret_number 
-		puts "Wrong, guess higher."
-	else
-		puts "Congratulations! Your won!"
-		false
+max = gets.to_i
+secret_number = Random.rand(max + 1)
+def game(max,secret_number)
+	while true
+		print "What's your guess? (between 0 and #{max})"
+		guess_number = gets.to_i
+		if guess_number > secret_number 
+			puts "Wrong, guess lower."
+		elsif guess_number < secret_number 
+			puts "Wrong, guess higher."
+		else
+			puts "Congratulations! Your won!"
+			break
+		end
 	end
 end
+
+game(max,secret_number)

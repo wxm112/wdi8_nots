@@ -6,17 +6,18 @@
 
 # puts "Goodbye"
 
- count = 10
 # while count > 0
 # 	puts "Counting down: #{count}"
 # 	count -= 1
 # end
 
 # puts "Blastoff!"
-
-until count == 0
-	puts "Counting down: #{count}"
-	count -= 1
+def count_down(count)
+	until count == 0
+		puts "Counting down: #{count}"
+		count -= 1
+	end
+	puts "Blastoff!"
 end
 
-puts "Blastoff!"
+count_down(10)

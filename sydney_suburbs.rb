@@ -10,9 +10,12 @@ suburb = gets.chomp.downcase
 # else
 # 	puts "I don't know where is it."
 # end
-
-case suburb 
-when "chatswood", "newtown" then puts "Good nomming"
-when "palm beach", "avalon" then puts "Long commute"
-else puts "I'm sure that's a very nice place"
+def suburb_check(suburb)
+	case suburb 
+	when "chatswood", "newtown" then puts "Good nomming"
+	when "palm beach", "avalon" then puts "Long commute"
+	else puts "I'm sure that's a very nice place"
+	end
 end
+
+suburb_check(suburb)
