@@ -11,7 +11,7 @@ def read_choice
   puts "5. Exponents"
   puts "6. Square roots"
 
-  puts "Q.Quit"
+  puts "Q. Quit"
 
   print "Please enter your selections: "
 
@@ -42,19 +42,24 @@ def square_roots(n)
   Math.sqrt(n)
 end
 
-menu_selection = read_choice
+menu_selection = nil
 
-if menu_selection != "q" && menu_selection != '6'
-  print "Enter the first number: "
-  n1 = gets.to_i
-  print "Enter the second number: "
-  n2 = gets.to_i
-elsif menu_selection == '6'
-  print "Enter your number: "
-  n = gets.to_i
-end
+loop do
+  menu_selection = read_choice
+  if menu_selection != "q"
+    if menu_selection.to_i < 6
+      print "Enter the first number: "
+      n1 = gets.to_i
+      print "Enter the second number: "
+      n2 = gets.to_i
+    else menu_selection == '6'
+      print "Enter your number: "
+      n = gets.to_i
+    end
+  else 
+  	break
+  end
 
-while menu_selection != "q"
   case menu_selection
   when '1'
     result = add(n1,n2)
@@ -75,16 +80,6 @@ while menu_selection != "q"
 
   puts "The result is: #{result}" unless result.nil?
 
-  menu_selection = read_choice
-  if menu_selection != "q" && menu_selection != '6'
-    print "Enter the first number: "
-    n1 = gets.to_i
-    print "Enter the second number: "
-    n2 = gets.to_i
-  elsif menu_selection == '6'
-    print "Enter your number: "
-    n = gets.to_i
-  end
 end
 
-puts "Thank you for using Crappy Calc"
+puts "Thank you for using May's Calculator."
