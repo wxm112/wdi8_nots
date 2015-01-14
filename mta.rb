@@ -8,7 +8,7 @@ line_n = ['time square', '34th', '28th', '23rd','union square', '8th']
 line_l = ['8th', '6th', 'union square', '3rd', '1st']
 line_6 = ['grand central', '33rd', '28th', '23rd', 'union square', 'astro place']
 
-def rute(start, ending)
+def route(start, ending)
   line_n = ['time square', '34th', '28th', '23rd','union square', '8th']
   line_l = ['8th', '6th', 'union square', '3rd', '1st']
   line_6 = ['grand central', '33rd', '28th', '23rd', 'union square', 'astro place']
@@ -85,13 +85,13 @@ def rute(start, ending)
 end
 
 
-rute(['n', '8th'],['n', 'time square'])
-rute(['n', '28th'],['n', '8th'])
-rute(['l', '8th'],['l', '1st'])
-rute(['l', '1st'],['l', '8th'])
-rute(['6', 'grand central'],['6', '23rd'])
-rute(['6', 'astro place'],['6', '23rd'])
-rute(['4','iii'],['4','858'])
-rute(['n', '8th'],['l', '1st'])
+route(['n', '8th'],['n', 'time square'])
+route(['n', '28th'],['n', '8th'])
+route(['l', '8th'],['l', '1st'])
+route(['l', '1st'],['l', '8th'])
+route(['6', 'grand central'],['6', '23rd'])
+route(['6', 'astro place'],['6', '23rd'])
+route(['4','iii'],['4','858'])
+route(['n', '8th'],['l', '1st'])
 
 binding.pry
