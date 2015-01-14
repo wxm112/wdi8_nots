@@ -16,17 +16,14 @@ def route(start, ending)
 
     if line.nil?
       puts "There is no such line: #{start[0]}"
+      return nil
     else
       s_index = line.index(start[1])
       e_index = line.index(ending[1])
       if s_index < e_index
-        stations = line[s_index..e_index]
-        numbers = stations.count
-        puts "There are #{numbers} stations: #{stations}."
+        return line[s_index..e_index]
       else
-        stations = line[e_index..s_index]
-        numbers = stations.count
-        puts "There are #{numbers} stations: #{stations.reverse}."
+        return line[e_index..s_index].reverse
       end
     end
 
@@ -44,14 +41,10 @@ def route(start, ending)
         u_l_index = LINE_L.index('union square')
         if u_l_index < e_index
           l_stations = LINE_L[u_l_index..e_index]
-          stations = (f_stations + l_stations).uniq
-          numbers = stations.count
-          puts "There are #{numbers} stations: #{stations}."
+          return (f_stations + l_stations).uniq
         else
           l_stations = LINE_L[e_index..u_l_index].reverse
-          stations = (f_stations + l_stations).uniq
-          numbers = stations.count
-          puts "There are #{numbers} stations: #{stations}."
+          return (f_stations + l_stations).uniq
         end
       end
     else
@@ -60,13 +53,38 @@ def route(start, ending)
   end
 end
 
+def test(expected, actual, test_name = nil)
+	if expected != actual
+		puts "Error: expected\n\t#{expected}\nbut got\n\t#{actual}"
+		puts "in test '#{test_name}'" unless test_name.nil?
+		puts ""
+	end
+end
 
-route(['n', '8th'],['n', 'time square'])
-route(['n', '28th'],['n', '8th'])
-route(['l', '8th'],['l', '1st'])
-route(['l', '1st'],['l', '8th'])
-route(['6', 'grand central'],['6', '23rd'])
-route(['6', 'astro place'],['6', '23rd'])
-route(['4','iii'],['4','858'])
-route(['n', '8th'],['l', '1st'])
+test(["8th", "union square", "23rd", "28th", "34th", "time square"],
+	route(['n', '8th'],['n', 'time square']),
+	"test1")
+
+test(["28th", "23rd", "union square", "8th"], route(['n', '28th'],['n', '8th']), "test2")
+
+test(["8th", "6th", "union square", "3rd", "1st"], route(['l', '8th'],['l', '1st']), "test3")
+
+test(["1st", "3rd", "union square", "6th", "8th"], route(['l', '1st'],['l', '8th']), "test4")
+
+test(["grand central", "33rd", "28th", "23rd"], route(['6', 'grand central'],['6', '23rd']), "test5")
+
+test(["astro place", "union square", "23rd"], route(['6', 'astro place'],['6', '23rd']), "test6")
+
+test(nil, route(['4','iii'],['4','858']), "test7")
+
+test(["8th", "union square", "3rd", "1st"], route(['n', '8th'],['l', '1st']), "test8")
+
+
+
+
+
+
+
+ 
+
 
