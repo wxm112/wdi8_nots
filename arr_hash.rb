@@ -1,3 +1,5 @@
+require 'pry'
+
 # A
 a = ["Anil", "Erik", "Jonathan"]
 # 1
@@ -40,6 +42,7 @@ p is["Erik"]
 p nil
 
 
+
 # D
 users = {
   "Jonathan" => {
@@ -55,24 +58,25 @@ users = {
     :favorite_numbers => [12, 14, 85],
   },
 }
-1
+binding.pry
+# 1
 p users["Jonathan"][:twitter]
 # 2
 p users['Erik'][:favorite_numbers] << 7
 # 3
-p users[:May] = 'May'
+p users['May'] =  {:twitter => "wxm112", :favorite_numbers => [6,8,9]}
 p users
 # 4
 p users["Erik"][:favorite_numbers]
 # 5
 p users["Erik"][:favorite_numbers].sort.first
 # 6
-p users["Anil"][:favorite_numbers].select {|n| n%2 == 0}
+p users["Anil"][:favorite_numbers].select {|n| n.even?}
 # 7
-p array = users["Jonathan"][:favorite_numbers] + users["Erik"][:favorite_numbers] + users["Anil"][:favorite_numbers]
-# array = []
-# users.each_value {|v| array << v[:favorite_numbers]}
-# p array.flatten
+# p array = users["Jonathan"][:favorite_numbers] + users["Erik"][:favorite_numbers] + users["Anil"][:favorite_numbers]
+array = []
+users.each_value {|v| array << v[:favorite_numbers]}
+p array.flatten
 # 8
 p array.flatten.sort.uniq
 
