@@ -26,43 +26,43 @@ def rute(start, ending)
         puts "There are #{numbers} stations: #{stations.reverse}."
       end
 
-      elsif start[0].downcase == "l"
-        s_index = line_l.index(start[1])
-        e_index = line_l.index(ending[1])
-        if s_index < e_index
-          stations = line_l[s_index..e_index]
-          numbers = stations.count
-          puts "There are #{numbers} stations: #{stations}."
-        else
-          stations = line_l[e_index..s_index]
-          numbers = stations.count
-          puts "There are #{numbers} stations: #{stations.reverse}."
-        end
-
-        elsif start[0].downcase == "6"
-        s_index = line_6.index(start[1])
-        e_index = line_6.index(ending[1])
-        if s_index < e_index
-          stations = line_6[s_index..e_index]
-          numbers = stations.count
-          puts "There are #{numbers} stations: #{stations}."
-        else
-          stations = line_6[e_index..s_index]
-          numbers = stations.count
-          puts "There are #{numbers} stations: #{stations.reverse}."
-        end
-
+    elsif start[0].downcase == "l"
+      s_index = line_l.index(start[1])
+      e_index = line_l.index(ending[1])
+      if s_index < e_index
+        stations = line_l[s_index..e_index]
+        numbers = stations.count
+        puts "There are #{numbers} stations: #{stations}."
       else
-        puts "Waiting"
+        stations = line_l[e_index..s_index]
+        numbers = stations.count
+        puts "There are #{numbers} stations: #{stations.reverse}."
       end
+
+    elsif start[0].downcase == "6"
+      s_index = line_6.index(start[1])
+      e_index = line_6.index(ending[1])
+      if s_index < e_index
+        stations = line_6[s_index..e_index]
+        numbers = stations.count
+        puts "There are #{numbers} stations: #{stations}."
+      else
+        stations = line_6[e_index..s_index]
+        numbers = stations.count
+        puts "There are #{numbers} stations: #{stations.reverse}."
+      end
+    else
+      puts "There is no such line."
     end
   end
+end
 
-  rute(['n', '8th'],['n', 'time square'])
-  rute(['n', '28th'],['n', '8th'])
-  rute(['l', '8th'],['l', '1st'])
-  rute(['l', '1st'],['l', '8th'])
-  rute(['6', 'grand central'],['6', '23rd'])
-  rute(['6', 'astro place'],['6', '23rd'])
+rute(['n', '8th'],['n', 'time square'])
+rute(['n', '28th'],['n', '8th'])
+rute(['l', '8th'],['l', '1st'])
+rute(['l', '1st'],['l', '8th'])
+rute(['6', 'grand central'],['6', '23rd'])
+rute(['6', 'astro place'],['6', '23rd'])
+rute(['4','iii'],['4','858'])
 
-  binding.pry
+binding.pry
