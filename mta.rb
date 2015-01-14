@@ -1,7 +1,4 @@
 
-require 'pry'
-
-
 LINE_N = ['times square', '34th', '28th', '23rd','union square', '8th']
 LINE_L = ['8th', '6th', 'union square', '3rd', '1st']
 LINE_6 = ['grand central', '33rd', '28th', '23rd', 'union square', 'astor place']
@@ -83,3 +80,22 @@ test(["astor place", "union square", "3rd", "1st"], route(['6', 'astor place'],[
 test(["times square", "34th", "28th", "23rd","union square","23rd","28th","33rd","grand central"], route(['n', 'times square'],['6', 'grand central']), "test10")
 
 test(["3rd", "union square", "23rd", "28th","34th"], route(['l', '3rd'],['n', '34th']), "test11")
+
+################################################################################
+################################################################################
+print "Which is your start line? "
+start_line = gets.chomp.downcase
+print "Which is your start station? "
+start_station = gets.chomp.downcase
+print "Which is your ending line? "
+ending_line = gets.chomp.downcase
+print "Which is your ending station? "
+ending_station = gets.chomp.downcase
+
+start = [start_line, start_station]
+ending = [ending_line,ending_station]
+
+p route(start, ending)
+
+
+
