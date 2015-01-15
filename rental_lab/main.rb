@@ -2,28 +2,18 @@
 require_relative 'tenant'
 require_relative 'apartment'
 require_relative 'building'
-# def read_choice
-#   puts "Welcome to our website."
-#   puts "Staff please choose 1, clients please choose 2:"
-#   menu1 = gets.chomp
-#   if menu1 == "1"
-#     puts "1. Adding a building to the available list."
-#     puts "2. Adding an apartment to the available list."
-#     puts "Q. Quit"
+def read_choice
+  puts "Welcome to our website."
+  puts "1. Adding a building"
+  puts "2. Adding an apartment"
+  puts "3. Adding a tenant"
+  puts "4. Assign a building"
+  puts "4. Assign an apartment"
+  puts "Q. Quit"
 
-#     print "Please enter your selections: "
-#     stuff_choice = gets.chomp.downcase
-#   else
-#     puts "1. Building list"
-#     puts "2. apartments list"
-#     puts "Q. Quit"
-
-#     print "Please enter your selections: "
-#     cline_choice = gets.chomp.downcase
-#   end
-# end
-# read_choice
-
+  print "Please enter your selections: "
+  gets.chomp.downcase
+end
 
 
 def create_tenant
@@ -105,15 +95,15 @@ def assign_building
 end
 
 def assign_apartment
-	puts "Choose your apartment.\n 0 to not assign"
-    Apartment.all_apartments.each_index do |i|
-      puts "#{i+1}. #{Apartment.all_apartments[i]}"
-    end
-    chosen_apartment = gets.chomp.to_i
-    if chosen_apartment == 0
-      return
-    else
-      apartment = Apartment.all_apartments[chosen_apartment-1]
+  puts "Choose your apartment.\n 0 to not assign"
+  Apartment.all_apartments.each_index do |i|
+    puts "#{i+1}. #{Apartment.all_apartments[i]}"
+  end
+  chosen_apartment = gets.chomp.to_i
+  if chosen_apartment == 0
+    return
+  else
+    apartment = Apartment.all_apartments[chosen_apartment-1]
     puts "Choose the tenant. \n 0 to not assign"
     Tenant.all_tenants.each_index do |i|
       puts "#{i+1}. #{Tenant.all_tenants[i]}"
