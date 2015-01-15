@@ -76,7 +76,7 @@ p users["Anil"][:favorite_numbers].select {|n| n.even?}
 # p array = users["Jonathan"][:favorite_numbers] + users["Erik"][:favorite_numbers] + users["Anil"][:favorite_numbers]
 array = []
 users.each_value {|v| array << v[:favorite_numbers]}
-p array.flatten
+array.flatten
 # 8
 p array.flatten.sort.uniq
 
