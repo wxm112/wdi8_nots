@@ -81,7 +81,7 @@ end
 
 
 def assign_building
-  puts "Choose your building. 0 to not assign"
+  puts "Choose your building. \n 0 to not assign"
   Building.all_buildings.each_index do |i|
     puts "#{i+1}. #{Building.all_buildings[i]}"
   end
@@ -90,7 +90,7 @@ def assign_building
     return
   else
     building = Building.all_buildings[chosen_building-1]
-    puts "Choose your apartment. 0 to not assign"
+    puts "Choose your apartment. \n0 to not assign"
     Apartment.all_apartments.each_index do |i|
       puts "#{i+1}. #{Apartment.all_apartments[i]}"
     end
@@ -104,7 +104,29 @@ def assign_building
   end
 end
 
-
+def assign_apartment
+	puts "Choose your apartment.\n 0 to not assign"
+    Apartment.all_apartments.each_index do |i|
+      puts "#{i+1}. #{Apartment.all_apartments[i]}"
+    end
+    chosen_apartment = gets.chomp.to_i
+    if chosen_apartment == 0
+      return
+    else
+      apartment = Apartment.all_apartments[chosen_apartment-1]
+    puts "Choose the tenant. \n 0 to not assign"
+    Tenant.all_tenants.each_index do |i|
+      puts "#{i+1}. #{Tenant.all_tenants[i]}"
+    end
+    chosen_tenant = gets.chomp.to_i
+    if chosen_tenant == 0
+      return
+    else
+      tenant = Tenant.all_tenants[chosen_apartment-1]
+      apartment.tenants << tenant
+    end
+  end
+end
 
 
 Apartment.new 'Apartment 12', 200,1,9
