@@ -23,9 +23,7 @@ require_relative 'building'
 #   end
 # end
 # read_choice
-tenants = []
-apartments = []
-buildings = []
+
 
 
 def create_tenant
@@ -39,10 +37,8 @@ def create_tenant
   print "Enter tenant gender: "
   gender = gets.chomp
 
-  Tenant.new name, age, gender
+	Tenant.new name, age, gender
 end
-
- tenants << create_tenant
 
 def create_apartment
   puts "Apartment Creation:"
@@ -60,9 +56,6 @@ def create_apartment
 
 	Apartment.new name, sqft, num_bathrooms, num_bedrooms
 end
-
-apartments << create_apartment
-
 
 def create_building
   puts "Building Creation:"
@@ -85,9 +78,11 @@ def create_building
 end
 
 
-buildings << create_building
 
 
+def assign_building
+
+end
 
 
 require 'pry'
