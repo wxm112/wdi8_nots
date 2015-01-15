@@ -108,7 +108,7 @@ def assign_apartment
     return
   else
     apartment = Apartment.all_apartments[chosen_apartment-1]
-    puts "Choose the tenant. \n 0 to not assign"
+    puts "Choose the tenant. \n0. to not assign"
     Tenant.all_tenants.each_index do |i|
       puts "#{i+1}. #{Tenant.all_tenants[i]}"
     end
@@ -116,7 +116,7 @@ def assign_apartment
     if chosen_tenant == 0
       return
     else
-      tenant = Tenant.all_tenants[chosen_apartment-1]
+      tenant = Tenant.all_tenants[chosen_tenant-1]
       $current_tenants << tenant
       $waiting_tenants = Tenant.all_tenants - $current_tenants
       apartment.tenants << tenant
