@@ -8,14 +8,18 @@ def read_choice
   puts "2. Adding an apartment"
   puts "3. Adding a tenant"
   puts "4. Assign a building"
-  puts "4. Assign an apartment"
+  puts "5. Assign an apartment"
+  puts "6. Print all available apartment"
+  puts "7. Print tenants who are living in our apartments."
+  puts "8. print tenant who are waiting for apartments."
   puts "Q. Quit"
 
   print "Please enter your selections: "
   gets.chomp.downcase
 end
 
-
+$waiting_tenants = []
+$current_tenants = []
 def create_tenant
   puts "Tenant Creation:"
   print "Enter tenant name: "
@@ -113,21 +117,57 @@ def assign_apartment
       return
     else
       tenant = Tenant.all_tenants[chosen_apartment-1]
+      $current_tenants << tenant
+      $waiting_tenants = Tenant.all_tenants - $current_tenants
       apartment.tenants << tenant
     end
   end
 end
 
+def available_apartments
+  Apartment.all_apartments.each do |i|
+    if i.occupied?
+      Apartment.all_apartments.delete(i)
+    end
+  end
+  puts Apartment.all_apartments
+end
+
 
 Apartment.new 'Apartment 12', 200,1,9
+Apartment.new 'Apartment 13', 400,4,9
 Building.new '123 Fake St', 'Gothic Industrial', false, false, 1000
 Tenant.new 'Craigsy', 22, "male"
 Tenant.new 'Jonesy', 55, "male"
 
+loop do
+  menu_selection = read_choice
+  if menu_selection != "q"
+    if menu_selection == "1"
+      create_building
+    elsif menu_selection == "2"
+      create_apartment
+    elsif menu_selection == "3"
+      create_tenant
+    elsif menu_selection == "4"
+      assign_building
+    elsif menu_selection == "5"
+      assign_apartment
+    elsif menu_selection == "6"
+      available_apartments
+    elsif menu_selection == "7"
+      puts $current_tenants
+    elsif menu_selection == "8"
+      puts $waiting_tenants
+    else
+      puts "Invalid choice."
+    end
+  else
+  	puts "Thank you for using our serverse."
+    break
+  end 
+end
 
-# def assign_apartment
-#   Apartment.all_apartments[-1].tenants << create_tenant
-# end
 
 
 require 'pry'
