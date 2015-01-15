@@ -1,20 +1,20 @@
 class Building
 	attr_accessor :address, :style, :has_doorman, :has_elevator, :num_floors, :apartments
-	@@all_building = []
+	@@all_buildings = []
 	def initialize(address,style,has_doorman,has_elevator,num_floors)
 		@address = address
 		@style = style
 		@has_doorman = has_doorman
 		@has_elevator = has_elevator
 		@num_floors = num_floors
-		@apartments = {}
-		@@all_building << self
+		@apartments = []
+		@@all_buildings << self
 	end
 
-	def self.all_building
-		@@all_building
+	def self.all_buildings
+		@@all_buildings
 	end
-	
+
 	def to_s
 		"The #{@style} building at #{@address} has #{@apartments.count} apartments."
 	end

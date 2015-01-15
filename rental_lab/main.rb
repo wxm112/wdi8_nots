@@ -37,7 +37,7 @@ def create_tenant
   print "Enter tenant gender: "
   gender = gets.chomp
 
-	Tenant.new name, age, gender
+  Tenant.new name, age, gender
 end
 
 def create_apartment
@@ -54,7 +54,7 @@ def create_apartment
   print "Enter the number of bedrooms: "
   num_bedrooms = gets.chomp
 
-	Apartment.new name, sqft, num_bathrooms, num_bedrooms
+  Apartment.new name, sqft, num_bathrooms, num_bedrooms
 end
 
 def create_building
@@ -81,8 +81,41 @@ end
 
 
 def assign_building
-
+  puts "Choose your building. 0 to not assign"
+  Building.all_buildings.each_index do |i|
+    puts "#{i+1}. #{Building.all_buildings[i]}"
+  end
+  chosen_building = gets.chomp.to_i
+  if chosen_building == 0
+    return
+  else
+    building = Building.all_buildings[chosen_building-1]
+    puts "Choose your apartment. 0 to not assign"
+    Apartment.all_apartments.each_index do |i|
+      puts "#{i+1}. #{Apartment.all_apartments[i]}"
+    end
+    chosen_apartment = gets.chomp.to_i
+    if chosen_apartment == 0
+      return
+    else
+      apartment = Apartment.all_apartments[chosen_apartment-1]
+      building.apartments << apartment
+    end
+  end
 end
+
+
+
+
+Apartment.new 'Apartment 12', 200,1,9
+Building.new '123 Fake St', 'Gothic Industrial', false, false, 1000
+Tenant.new 'Craigsy', 22, "male"
+Tenant.new 'Jonesy', 55, "male"
+
+
+# def assign_apartment
+#   Apartment.all_apartments[-1].tenants << create_tenant
+# end
 
 
 require 'pry'
