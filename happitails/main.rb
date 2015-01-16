@@ -2,9 +2,26 @@ require_relative 'animal'
 require_relative 'client'
 
 $shelter = {:all_animals => [],
-	:animals_waiting_for_adoption => [], 
-	:all_clients => [], 
-	:clients_waiting_for_animal => []}
+            :animals_waiting_for_adoption => [],
+            :all_clients => [],
+            :clients_waiting_for_animal => []}
+
+def read_choice
+  puts "Welcome to our website."
+  puts "1. Adding a client"
+  puts "2. Adding an animal"
+  puts "3. Submiting an adopt application"
+  puts "4. Putting a animal for adoption"
+  puts "5. Listing all clients"
+  puts "6. Listing all animals"
+  puts "7. Listing clients who are waiting for adopting animals. "
+  puts "8. Listing animals who are waiting to be adopted."
+  puts "Q. Quit"
+
+  print "Please enter your selections: "
+  gets.chomp.downcase
+end
+
 
 def add_client
   print "Enter the name: "
@@ -76,6 +93,33 @@ def put_to_adopt
   puts "You have put your pet for adoption successfully."
 end
 
+loop do
+  menu_selection = read_choice
+  if menu_selection != "q"
+    if menu_selection == "1"
+      add_client
+    elsif menu_selection == "2"
+      add_animal
+    elsif menu_selection == "3"
+      adopt
+    elsif menu_selection == "4"
+      put_to_adopt
+    elsif menu_selection == "5"
+	  puts $shelter[:all_clients]
+    elsif menu_selection == "6"
+      puts $shelter[:all_animals]
+    elsif menu_selection == "7"
+      puts $shelter[:clients_waiting_for_animal]
+    elsif menu_selection == "8"
+      puts $shelter[:animals_waiting_for_adoption]
+    else
+      puts "Invalid choice."
+    end
+  else
+  	puts "Thank you for using our serverse."
+    break
+  end 
+end
 
 require "pry"
 binding.pry
