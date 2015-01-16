@@ -9,8 +9,7 @@ class Animal
   end
 
   def to_s
-  	puts "=" * 80
-    puts "#{@name} is #{species}, #{gender}, #{@age} years old and has #{@toys}. "
+    "#{@name} is #{species}, #{gender}, #{@age} years old and has #{@toys}. "
   end
 end
 
