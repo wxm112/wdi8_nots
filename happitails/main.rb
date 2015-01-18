@@ -23,31 +23,35 @@ def add_client
 end
 
 def add_animal
-  v = get_user_input({ name: "the animal's name", 
-    age: "the animal's age",
-    gender: "the animal's gender",
-    species: "the animal's species",
-    toys: "the animal's toys (please separate with space)" })
+  v = get_user_input({ name: "the animal's name",
+                       age: "the animal's age",
+                       gender: "the animal's gender",
+                       species: "the animal's species",
+                       toys: "the animal's toys (please separate with space)" })
 
   $shelter[:all_animals] << Animal.new(v[:name], v[:age], v[:gender], v[:species], v[:toys].split)
   puts "You have add #{v[:name]} successfully."
 end
 
-def adopt_application
-  client = select_client(:all_clients)
+
+def with_selected_client(list)
+  client = select(list, 'client')
   return if client.nil?
-  $shelter[:clients_waiting_for_animal] << client
-  puts "You have submit your adopt appliation successfully."
+  yield client
 end
 
-def select_client(list)
-  select(list, 'client')
+def with_selected_animal(list)
+  animal = select(list, 'pet')
+  return if animal.nil?
+  yield animal
 end
 
-def select_animal(list)
-  select(list, 'pet')
+def adopt_application
+  with_selected_client(:all_clients) do |client|
+    $shelter[:clients_waiting_for_animal] << client
+    puts "You have submit your adopt appliation successfully."
+  end
 end
-
 
 def select(list, thing)
   puts "Choose the #{thing}'s name: \n0. Back"
@@ -64,21 +68,21 @@ end
 
 
 def put_to_adopt
-  animal = select_animal(:all_animals)
-  return if animal.nil?
-  $shelter[:animals_waiting_for_adoption] << animal
-  puts "You have put your pet for adoption successfully."
+  with_selected_animal(:all_animals) do |animal|
+    $shelter[:animals_waiting_for_adoption] << animal
+    puts "You have put your pet for adoption successfully."
+  end
 end
 
 def assign_animal
-  client = select_client(:clients_waiting_for_animal)
-  return if client.nil?
-  $shelter[:clients_waiting_for_animal].delete(client)
-  animal = select_animal(:animals_waiting_for_adoption)
-  return if animal.nil?
-  $shelter[:animals_waiting_for_adoption].delete(animal)
-  $shelter[:all_animals].delete(animal)
-  client.num_pets += 1
+  with_selected_client(:clients_waiting_for_animal) do |client|
+    with_selected_animal(:animals_waiting_for_adoption) do |animal|
+      $shelter[:clients_waiting_for_animal].delete(client)
+      $shelter[:animals_waiting_for_adoption].delete(animal)
+      $shelter[:all_animals].delete(animal)
+      client.num_pets += 1
+    end
+  end
 end
 
 def print_list (list)
