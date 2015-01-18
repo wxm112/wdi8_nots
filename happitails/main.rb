@@ -1,11 +1,9 @@
 require_relative 'animal'
 require_relative 'client'
 require "pry"
+require 'yaml'
 
-$shelter = {:all_animals => [],
-            :animals_waiting_for_adoption => [],
-            :all_clients => [],
-            :clients_waiting_for_animal => []}
+$shelter = YAML::load(File.read('temp.yaml'))
 
 def get_user_input(prompts)
   result = {}
@@ -86,8 +84,6 @@ def print_list (list)
   end
 end
 
-$shelter[:all_animals] << Animal.new("Black", 4, "Femail", "pig", ["headphoen", "paddy"])
-$shelter[:all_clients] << Client.new("May Wang", 0, 32, 0)
 
 loop do
   menu = {  '1' => { text: "Add a client", code: lambda { add_client } },
@@ -113,4 +109,5 @@ loop do
   else
     menu[selection][:code].call
   end
+  File.open('temp.yaml','w') { |file| file.write(YAML::dump($shelter)) }
 end
