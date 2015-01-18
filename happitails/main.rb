@@ -7,25 +7,6 @@ $shelter = {:all_animals => [],
             :all_clients => [],
             :clients_waiting_for_animal => []}
 
-def read_choice
-  puts "Welcome to our website."
-  puts "1. Adding a client"
-  puts "2. Adding an animal"
-  puts "3. Submiting an adopt application"
-  puts "4. Putting a animal for adoption"
-  puts "5. Assigning an animal to a client."
-  puts "6. Listing all clients"
-  puts "7. Listing all animals"
-  puts "8. Listing clients who are waiting for adopting animals. "
-  puts "9. Listing animals who are waiting to be adopted."
-  puts "Q. Quit"
-  puts "x. binding.pry"
-
-  print "Please enter your selections: "
-  gets.chomp.downcase
-end
-
-
 def add_client
   print "Enter the name: "
   name = gets.chomp
@@ -113,54 +94,39 @@ def assign_animal
   client.num_pets += 1
 end
 
+def print_list (list)
+  if $shelter[list].empty?
+    puts "   ====  NO RECORDS  ===="
+  else
+    puts $shelter[list]
+  end 
+end
+
 $shelter[:all_animals] << Animal.new("Black", 4, "Femail", "pig", ["headphoen", "paddy"])
 $shelter[:all_clients] << Client.new("May Wang", 0, 32, 0)
 
 loop do
-  menu_selection = read_choice
-  if menu_selection != "q"
-    if menu_selection == "1"
-      add_client
-    elsif menu_selection == "2"
-      add_animal
-    elsif menu_selection == "3"
-      adopt_application
-    elsif menu_selection == "4"
-      put_to_adopt
-    elsif menu_selection == "5"
-      assign_animal
-    elsif menu_selection == "6"
-      if  ($shelter[:all_clients]).count == 0
-        puts "Sorry, we haven't got any client signed up."
-      else
-        puts $shelter[:all_clients]
-      end
-    elsif menu_selection == "7"
-      if ($shelter[:all_animals]).count == 0
-        puts "Sorry, we don't have any animal currently."
-      else
-        puts $shelter[:all_animals]
-      end
-    elsif menu_selection == "8"
-      if ($shelter[:clients_waiting_for_animal]).count == 0
-        puts "There is no client waiting for adopting animals."
-      else
-        puts $shelter[:clients_waiting_for_animal]
-      end
-    elsif menu_selection == "9"
-      if ($shelter[:animals_waiting_for_adoption]).count == 0
-        puts "There is no animal waiting for adoption."
-      else
-        puts $shelter[:animals_waiting_for_adoption]
-      end
-    elsif menu_selection == "x"
-      binding.pry
-    else
-      puts "Invalid choice."
-    end
+  menu = {  '1' => { text: "Add a client", code: lambda { add_client } },
+            '2' => { text: 'Add an animal', code: lambda { add_animal } },
+            '3' => { text: 'Submit adoption application', code: lambda { adopt_application } },
+            '4' => { text: 'Put an animal up for adoption', code: lambda { put_to_adopt } },
+            '5' => { text: 'Assign animal to client', code: lambda { assign_animal } },
+            '6' => { text: 'List all clients', code: lambda { print_list(:all_clients) } },
+            '7' => { text: 'List all animals', code: lambda { print_list(:all_animals) } },
+            '8' => { text: 'List clients waiting to adopt', code: lambda { print_list(:clients_waiting_for_animal) } },
+            '9' => { text: 'List animals waiting to be adopted', code: lambda { print_list(:animals_waiting_for_adoption) } },
+            'q' => { text: 'Quit', code: lambda { exit } },
+            'x' => { text: 'binding.pry', code: lambda { binding.pry } } }
+
+  puts "Welcome to our terminal site."
+  menu.each_key { |k| puts "#{k}. #{menu[k][:text]}" }
+
+  print "Please enter your selections: "
+
+  selection = gets.chomp.downcase
+  if menu[selection].nil?
+    puts "Invalid choice"
   else
-    puts "Thank you for using our serverse."
-    break
+    menu[selection][:code].call
   end
 end
-
