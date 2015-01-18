@@ -74,27 +74,24 @@ end
 
 def select_client(list)
   puts "Choose the client's name: \n0. Back"
-  $shelter[list].each_index do |i|
-    puts "#{i+1}. #{$shelter[list][i]}"
-  end
-  chosen_client = gets.chomp.to_i
-  if chosen_client == 0
-    return nil
-  else
-    return $shelter[list][chosen_client - 1]
-  end
+  select(list)
 end
 
 def select_animal(list)
   puts "Choose the pet's name: \n0. Back"
+  select(list)
+end
+
+
+def select(list)
   $shelter[list].each_index do |i|
     puts "#{i+1}. #{$shelter[list][i]}"
   end
-  chosen_animal = gets.chomp.to_i
-  if chosen_animal == 0
+  choice = gets.chomp.to_i
+  if choice == 0
     return nil
   else
-    animal = $shelter[list][chosen_animal - 1]
+    $shelter[list][choice - 1]
   end
 end
 
