@@ -7,43 +7,30 @@ $shelter = {:all_animals => [],
             :all_clients => [],
             :clients_waiting_for_animal => []}
 
+def get_user_input(prompts)
+  result = {}
+  prompts.each_key do |k|
+    print "Enter #{prompts[k]}: "
+    result[k] = gets.chomp
+  end
+  result
+end
+
 def add_client
-  print "Enter the name: "
-  name = gets.chomp
-
-  print "Enter the number of children: "
-  num_children = gets.chomp
-
-  print "Enter the age: "
-  age = gets.chomp
-
-  print "How many pets do you have? "
-  num_pets = gets.chomp.to_i
-
-  client = Client.new name, num_children, age, num_pets
-  $shelter[:all_clients] << client
-  puts "You have add #{name} successfully."
+  v = get_user_input({ name: "name",  num_children: "number of children", age: "age", num_pets: "the number of pets"})
+  $shelter[:all_clients] << Client.new(v[:name], v[:num_children].to_i, v[:age], v[:num_pets].to_i)
+  puts "You have add #{v[:name]} successfully."
 end
 
 def add_animal
-  print "Enter the animal's name: "
-  name = gets.chomp
+  v = get_user_input({ name: "the animal's name", 
+    age: "the animal's age",
+    gender: "the animal's gender",
+    species: "the animal's species",
+    toys: "the animal's toys (please separate with space)" })
 
-  print "Enter the age: "
-  age = gets.chomp
-
-  print "Enter the gender: "
-  gender = gets.chomp
-
-  print "Enter the species: "
-  species = gets.chomp
-
-  print "Enter the animal's toys \n(please use speace to seprate them if it has nultiple toys): "
-  toys = gets.chomp.split
-
-  animal = Animal.new name, age, gender, species, toys
-  $shelter[:all_animals] << animal
-  puts "You have add #{name} successfully."
+  $shelter[:all_animals] << Animal.new(v[:name], v[:age], v[:gender], v[:species], v[:toys].split)
+  puts "You have add #{v[:name]} successfully."
 end
 
 def adopt_application
@@ -99,7 +86,7 @@ def print_list (list)
     puts "   ====  NO RECORDS  ===="
   else
     puts $shelter[list]
-  end 
+  end
 end
 
 $shelter[:all_animals] << Animal.new("Black", 4, "Femail", "pig", ["headphoen", "paddy"])
