@@ -1,5 +1,6 @@
 require_relative 'animal'
 require_relative 'client'
+require "pry"
 
 $shelter = {:all_animals => [],
             :animals_waiting_for_adoption => [],
@@ -18,6 +19,7 @@ def read_choice
   puts "8. Listing clients who are waiting for adopting animals. "
   puts "9. Listing animals who are waiting to be adopted."
   puts "Q. Quit"
+  puts "x. binding.pry"
 
   print "Please enter your selections: "
   gets.chomp.downcase
@@ -64,63 +66,59 @@ def add_animal
 end
 
 def adopt_application
-  puts "Choose the client's name: \n0. Back"
-  $shelter[:all_clients].each_index do |i|
-    puts "#{i+1}. #{$shelter[:all_clients][i]}"
-  end
-  chosen_client = gets.chomp.to_i
-  if chosen_client == 0
-    return
-  else
-    client = $shelter[:all_clients][chosen_client - 1]
-    $shelter[:clients_waiting_for_animal] << client
-  end
+  client = select_client(:all_clients)
+  return if client.nil?
+  $shelter[:clients_waiting_for_animal] << client
   puts "You have submit your adopt appliation successfully."
 end
 
-def put_to_adopt
+def select_client(list)
+  puts "Choose the client's name: \n0. Back"
+  $shelter[list].each_index do |i|
+    puts "#{i+1}. #{$shelter[list][i]}"
+  end
+  chosen_client = gets.chomp.to_i
+  if chosen_client == 0
+    return nil
+  else
+    return $shelter[list][chosen_client - 1]
+  end
+end
+
+def select_animal(list)
   puts "Choose the pet's name: \n0. Back"
-  $shelter[:all_animals].each_index do |i|
-    puts "#{i+1}. #{$shelter[:all_animals][i]}"
+  $shelter[list].each_index do |i|
+    puts "#{i+1}. #{$shelter[list][i]}"
   end
   chosen_animal = gets.chomp.to_i
   if chosen_animal == 0
-    return
+    return nil
   else
-    animal = $shelter[:all_animals][chosen_animal - 1]
-    $shelter[:animals_waiting_for_adoption] << animal
+    animal = $shelter[list][chosen_animal - 1]
   end
+end
+
+
+def put_to_adopt
+  animal = select_animal(:all_animals)
+  return if animal.nil?
+  $shelter[:animals_waiting_for_adoption] << animal
   puts "You have put your pet for adoption successfully."
 end
 
 def assign_animal
-  puts "Choose the client's name: \n0. Back"
-  $shelter[:clients_waiting_for_animal].each_index do |i|
-    puts "#{i+1}. #{$shelter[:clients_waiting_for_animal][i]}"
-  end
-  chosen_client = gets.chomp.to_i
-  if chosen_client == 0
-    return
-  else
-    client = $shelter[:clients_waiting_for_animal][chosen_client - 1]
-    $shelter[:clients_waiting_for_animal].delete(client)
-    client.num_pets += 1
-  end
-
-  puts "Choose the pet's name: \n0. Back"
-  $shelter[:animals_waiting_for_adoption].each_index do |i|
-    puts "#{i+1}. #{$shelter[:animals_waiting_for_adoption][i]}"
-  end
-  chosen_animal = gets.chomp.to_i
-  if chosen_animal == 0
-    return
-  else
-    animal = $shelter[:animals_waiting_for_adoption][chosen_animal - 1]
-    $shelter[:animals_waiting_for_adoption].delete(animal)
-    $shelter[:all_animals].delete(animal)
-  end
-
+  client = select_client(:clients_waiting_for_animal)
+  return if client.nil?
+  $shelter[:clients_waiting_for_animal].delete(client)
+  animal = select_animal(:animals_waiting_for_adoption)
+  return if animal.nil?
+  $shelter[:animals_waiting_for_adoption].delete(animal)
+  $shelter[:all_animals].delete(animal)
+  client.num_pets += 1
 end
+
+$shelter[:all_animals] << Animal.new("Black", 4, "Femail", "pig", ["headphoen", "paddy"])
+$shelter[:all_clients] << Client.new("May Wang", 0, 32, 0)
 
 loop do
   menu_selection = read_choice
@@ -144,7 +142,7 @@ loop do
     elsif menu_selection == "7"
       if ($shelter[:all_animals]).count == 0
         puts "Sorry, we don't have any animal currently."
-      else 
+      else
         puts $shelter[:all_animals]
       end
     elsif menu_selection == "8"
@@ -159,6 +157,8 @@ loop do
       else
         puts $shelter[:animals_waiting_for_adoption]
       end
+    elsif menu_selection == "x"
+      binding.pry
     else
       puts "Invalid choice."
     end
@@ -168,5 +168,3 @@ loop do
   end
 end
 
-require "pry"
-binding.pry

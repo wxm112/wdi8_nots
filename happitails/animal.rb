@@ -12,7 +12,3 @@ class Animal
     "#{@name} is #{species}, #{gender}, #{@age} years old and has #{@toys}. "
   end
 end
-
-piggy = Animal.new("Black", 4, "Femail", "pig", ["headphoen", "paddy"])
-piggy.to_s
-p piggy

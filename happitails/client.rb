@@ -13,6 +13,3 @@ class Client
   end
 end
 
-
-may= Client.new("May Wang", 0, 32, 0)
-may.to_s
