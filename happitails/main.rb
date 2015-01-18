@@ -33,21 +33,14 @@ def add_animal
   puts "You have add #{v[:name]} successfully."
 end
 
-
-def with_selected_client(list)
-  client = select(list, 'client')
-  return if client.nil?
-  yield client
-end
-
-def with_selected_animal(list)
-  animal = select(list, 'pet')
-  return if animal.nil?
-  yield animal
+def with_selected(thing, list)
+  choice = select(list, thing)
+  return if choice.nil?
+  yield choice
 end
 
 def adopt_application
-  with_selected_client(:all_clients) do |client|
+  with_selected('client', :all_clients) do |client|
     $shelter[:clients_waiting_for_animal] << client
     puts "You have submit your adopt appliation successfully."
   end
@@ -68,15 +61,15 @@ end
 
 
 def put_to_adopt
-  with_selected_animal(:all_animals) do |animal|
+  with_selected('animal', :all_animals) do |animal|
     $shelter[:animals_waiting_for_adoption] << animal
     puts "You have put your pet for adoption successfully."
   end
 end
 
 def assign_animal
-  with_selected_client(:clients_waiting_for_animal) do |client|
-    with_selected_animal(:animals_waiting_for_adoption) do |animal|
+  with_selected('client', :clients_waiting_for_animal) do |client|
+    with_selected('animal', :animals_waiting_for_adoption) do |animal|
       $shelter[:clients_waiting_for_animal].delete(client)
       $shelter[:animals_waiting_for_adoption].delete(animal)
       $shelter[:all_animals].delete(animal)
