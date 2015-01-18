@@ -73,17 +73,16 @@ def adopt_application
 end
 
 def select_client(list)
-  puts "Choose the client's name: \n0. Back"
-  select(list)
+  select(list, 'client')
 end
 
 def select_animal(list)
-  puts "Choose the pet's name: \n0. Back"
-  select(list)
+  select(list, 'pet')
 end
 
 
-def select(list)
+def select(list, thing)
+  puts "Choose the #{thing}'s name: \n0. Back"
   $shelter[list].each_index do |i|
     puts "#{i+1}. #{$shelter[list][i]}"
   end
