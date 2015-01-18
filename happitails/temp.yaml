@@ -7,6 +7,13 @@
   species: some kind of 恶魔
   toys:
   - seaweed
+- !ruby/object:Animal
+  name: Elliot Ruirui Wang Hallström
+  age: '0'
+  gender: unknown
+  species: mostly human
+  toys:
+  - nipple
 :animals_waiting_for_adoption: []
 :all_clients:
 - !ruby/object:Client

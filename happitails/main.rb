@@ -50,13 +50,8 @@ def select(list, thing)
     puts "#{i+1}. #{$shelter[list][i]}"
   end
   choice = gets.chomp.to_i
-  if choice == 0
-    return nil
-  else
-    $shelter[list][choice - 1]
-  end
+  choice == 0 ? nil : $shelter[list][choice - 1]
 end
-
 
 def put_to_adopt
   with_selected('animal', :all_animals) do |animal|
