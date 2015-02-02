@@ -25,12 +25,7 @@ def yell?(conversation)
   conversation.length > 0 and conversation == conversation.upcase
 end
 
-
-
-
-
-
-def number(conversation)
+def convert_to_number(conversation)
   conversation.tr('aeio','4310')
 end
 
@@ -39,47 +34,24 @@ def letter?(lookAhead)
   lookAhead =~ /[[:alpha:]]/
 end
 
-def char_array(centence)
-  word_array = centence.split
-  char_array = []
-  word_array.each {|w| char_array << w.chars}
-  char_array
+def char_array(sentence)
+  sentence.split.map {|w| w.chars}
 end
 
 def alter_case(array)
-  array.map do |i|
-    if a.index(i).odd? and letter?(a[a.index(i)-1]) == 0
-      i.upcase
-    else
-      i
+  array.map do |str|
+    str.each_with_index.map do |val, index|
+      (index.odd? and letter?(str[index-1])) ? val.upcase : val
     end
   end
 end
 
 def p34k(conversation)
-  downcase = number(conversation).downcase
-  letter_array = char_array(downcase)
-  letter_array.each do |a|
-    a.map! do |i|
-      if a.index(i).odd? and letter?(a[a.index(i)-1])
-        i.upcase
-      else
-        i
-      end
-    end
-  end
-  letter_array.map! {|a| a.join}
-  letter_array.join(" ")
+  letter_array = char_array(convert_to_number(conversation).downcase)
+  alter_case(letter_array).map {|a| a.join}.join(" ")
 end
-
-
-
 
 loop do
-  print "Say something to bob: "
-  conversation = gets.chomp
-  chat(conversation)
+  print "Say something to Bob: "
+  chat(gets.chomp)
 end
-
-
-binding.pry
