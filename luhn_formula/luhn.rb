@@ -31,15 +31,6 @@ class Luhn
   #     array.each_index.map {|i| i.odd? ? digit_cal(array[i]) : array[i]}
   #   end
   # end
-
-  def addends
-    @number.to_s.reverse.chars.map.each_with_index do |digit, i|
-      digit = digit.to_i
-      digit = digit * 2 unless (i % 2 == 0)
-      digit = digit - 9 if digit >= 10
-      digit
-    end.reverse
-  end
        
   def checksum
     addends.reduce(:+)
@@ -47,6 +38,16 @@ class Luhn
 
   def valid?
     checksum % 10 == 0
+  end
+
+  private
+  def addends
+    @number.to_s.reverse.chars.map.each_with_index do |digit, i|
+      digit = digit.to_i
+      digit = digit * 2 unless (i % 2 == 0)
+      digit = digit - 9 if digit >= 10
+      digit
+    end.reverse
   end
 
 end
