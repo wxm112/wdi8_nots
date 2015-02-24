@@ -5,11 +5,7 @@ class DNA
   end
 
   def count(letter)
-    if "ATCGU".include?(letter)
-      @string.count(letter)
-    else
-      raise ArgumentError.new("That's not a nucleotie, silly!")
-    end
+    "ATCGU".include?(letter) ? (@string.count(letter)) : (raise ArgumentError.new("That's not a nucleotie, silly!"))
   end
 
   def nucleotide_counts
