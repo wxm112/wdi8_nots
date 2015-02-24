@@ -2,11 +2,10 @@ class DNA
 
   def initialize (string)
     @string = string
-    @array = ['A','T','C','G','U']
   end
 
   def count(letter)
-    if @array.include?(letter)
+    if "ATCGU".include?(letter)
       @string.count(letter)
     else
       raise ArgumentError.new("That's not a nucleotie, silly!")
@@ -15,7 +14,7 @@ class DNA
 
   def nucleotide_counts
     hash = {}
-    @array.each {|a| hash[a]=count(a)}
+    "ATCGU".chars.each {|a| hash[a]=count(a)}
     hash
   end
 
