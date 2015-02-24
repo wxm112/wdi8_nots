@@ -9,9 +9,8 @@ class DNA
   end
 
   def nucleotide_counts
-    hash = {}
-    "ATCGU".chars.each {|a| hash[a]=count(a)}
-    hash
+    array = "ATCGU".chars
+    Hash[array.map {|n| [n, count(n)]}]
   end
 
 end
