@@ -5,20 +5,13 @@ class DNA
     @strand = strand
   end
 
-  def diff(anther_strand)
-    result = []
-    @strand.chars.each_index do |i|
-      unless @strand.chars[i] == anther_strand.chars[i]
-        result << i
-      end
-    end
-    result
-  end
 
   def hamming_distance(anther_strand)
-    result = diff(anther_strand)
-    if @strand.chars.length > anther_strand.chars.length
-      result.length - @strand.chars.length + anther_strand.chars.length 
+    array = @strand.chars
+    anther_array = anther_strand.chars
+    result = (array.each_with_index.map {|l,i| l != anther_array[i] ? 1 : nil}).compact
+    if array.length > anther_array.length
+      result.length - array.length + anther_array.length 
     else
       result.length
     end
