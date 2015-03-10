@@ -8,9 +8,8 @@ class Sieve
     list = (2..@number).to_a
     primes = [ ]
     while list.empty? != true do 
-      first = list[0]
-      primes << first
-      list.select! {|n| n % first != 0}
+      primes << list[0]
+      list = list.select {|n| n % list[0] != 0}
     end
     primes
   end
