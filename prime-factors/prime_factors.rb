@@ -5,7 +5,7 @@ class PrimeFactors
   def self.for(num)
     array = (2..num).to_a
     factors = []
-    return factors << [] if num == 1 
+    return factors if num == 1 
     array.each do |n|
       if num % n == 0
         factors << n  
@@ -14,6 +14,15 @@ class PrimeFactors
     end
     factors
   end
+
+  def self.is_prime?(num)
+    (2...num).each do |divisor|
+      return false if num % divisor == 0
+    end
+
+    true
+  end
+
 end
 
 p PrimeFactors.for(4)

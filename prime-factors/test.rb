@@ -4,15 +4,15 @@ require_relative './prime_factors'
  
 class PrimeFactorsTestTest < MiniTest::Test
   def test_one
-    skip
+    # skip
     assert_equal [], PrimeFactors.for(1)
   end
   def test_two
-    skip
+    # skip
     assert_equal [2], PrimeFactors.for(2)
   end
   def test_three
-    skip
+    # skip
     assert_equal [3], PrimeFactors.for(3)
   end
   def test_four
