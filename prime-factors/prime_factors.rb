@@ -2,15 +2,15 @@ require 'pry'
 
 class PrimeFactors
 
-  def self.for(num)
+  def self.for(num, factors=[])
     array = (2..num).to_a
-    factors = []
-    return factors if num == 1 
-    array.each do |n|
-      if num % n == 0
-        factors << n  
-        self.for(num/n)
-      end
+    array.empty? ? (return factors) : (factor1 = array.detect{|n| num % n == 0})
+    factors << factor1
+    factor2 = num/factor1
+    if factor2 == 1
+      return factors
+    else
+      self.is_prime?(factor2) ? (factors << factor2) : self.for(factor2, factors)
     end
     factors
   end
@@ -19,13 +19,14 @@ class PrimeFactors
     (2...num).each do |divisor|
       return false if num % divisor == 0
     end
-
     true
   end
-
 end
 
-p PrimeFactors.for(4)
+
+
+
+
 
 
 # class PrimeFactors
@@ -35,7 +36,7 @@ p PrimeFactors.for(4)
 #     factors = []
 #     divisor = 2
 #     while number > 1
-#       while number % divisor == 0 
+#       while number % divisor == 0
 #         number /= divisor
 #         factors << divisor
 #       end

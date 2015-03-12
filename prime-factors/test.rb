@@ -20,27 +20,27 @@ class PrimeFactorsTestTest < MiniTest::Test
     assert_equal [2, 2], PrimeFactors.for(4)
   end
   def test_six
-    skip
+    # skip
     assert_equal [2, 3], PrimeFactors.for(6)
   end
   def test_eight
-    skip
+    # skip
     assert_equal [2, 2, 2], PrimeFactors.for(8)
   end
   def test_nine
-    skip
+    # skip
     assert_equal [3, 3], PrimeFactors.for(9)
   end
   def test_twenty_seven
-    skip
+    # skip
     assert_equal [3, 3, 3], PrimeFactors.for(27)
   end
   def test_large_number
-    skip
+    # skip
     assert_equal [5, 5, 5, 5], PrimeFactors.for(625)
   end
   def test_really_large_number
-    skip
+    # skip
     assert_equal [5, 17, 23, 461], PrimeFactors.for(901255)
   end
  
